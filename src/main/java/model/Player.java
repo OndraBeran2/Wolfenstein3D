@@ -31,7 +31,12 @@ public class Player {
     }
 
     public void setAngle(double angle) {
-        this.angle = angle;
+        if(angle < 360){
+            this.angle = angle;
+        }
+        else {
+            this.angle = angle % 360;
+        }
     }
 
     public Player(double xCoor, double yCoor, double angle) {

@@ -12,8 +12,29 @@ public class MainModel {
     private double castRay(double angle){
         Ray ray = new Ray(player.getxCoor(), player.getyCoor(), angle);
         Point firstIntersectX = firstIntersectX(ray);
+
+        double deltaX;
+        double deltaY;
+
+        if(angle <= 90) {
+            //deltaX must be positive
+            deltaX = Math.pow(Math.tan(Math.toRadians(angle)), -1) * map.getTILE_SIZE();
+            deltaY = -1 * map.getTILE_SIZE();
+        } else if (angle > 90 && angle <= 180){
+            deltaX = Math.pow(Math.tan(Math.toRadians(180 - angle)), 1) * map.getTILE_SIZE() * -1;
+            deltaY = -1 * map.getTILE_SIZE();
+        } else if (angle > 180 && angle <= 270){
+            deltaX = Math.pow(Math.tan(Math.toRadians(angle - 180)), -1) * map.getTILE_SIZE() * -1;
+            deltaY = map.getTILE_SIZE();
+        } else {
+            deltaX = Math.pow(Math.tan(Math.toRadians(360 - angle)), -1) * map.getTILE_SIZE();
+            deltaY = map.getTILE_SIZE();
+        }
+
+        Point nextIntersectX = new Point(firstIntersectX.getX(), firstIntersectX.getY());
+
+
         Point firstIntersectY = firsIntersectY(ray);
-        
         return 0;
     }
 

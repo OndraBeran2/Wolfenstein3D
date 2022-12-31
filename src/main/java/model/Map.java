@@ -33,4 +33,8 @@ public class Map {
     public boolean[][] getWalls() {
         return walls;
     }
+
+    public boolean inBounds(Point p){
+        return false;
+    }
 }

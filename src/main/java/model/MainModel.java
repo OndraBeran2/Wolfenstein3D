@@ -1,8 +1,8 @@
 package model;
 
 public class MainModel {
-    private Map map;
-    private Player player;
+    private final Map map;
+    private final Player player;
 
     public MainModel(Map map, Player player) {
         this.map = map;
@@ -33,6 +33,28 @@ public class MainModel {
 
         Point nextIntersectX = new Point(firstIntersectX.getX(), firstIntersectX.getY());
 
+        while (map.inBounds(nextIntersectX)){
+            //step into cell
+            Point temp;
+            double tempY;
+
+            if (angle < 180){
+                tempY = nextIntersectX.getY() - 1;
+            } else {
+                tempY = nextIntersectX.getY() + 1;
+            }
+
+            temp = new Point(nextIntersectX.getX(), tempY);
+
+            //check for walls
+            if (map.isWall(temp)){
+                return Point.distance(nextIntersectX, new Point(ray.getxCoor(), ray.getyCoor()));
+            } else {
+                double newX = nextIntersectX.getX() + deltaX;
+                double newY = nextIntersectX.getY() + deltaY;
+                nextIntersectX = new Point(newX, newY);
+            }
+        }
 
         Point firstIntersectY = firsIntersectY(ray);
         return 0;
@@ -43,6 +65,7 @@ public class MainModel {
         Point p = m.firsIntersectY(new Ray(m.player.getxCoor(), m.player.getyCoor(), m.player.getAngle()));
         System.out.println(p.getX() + " " + (int)p.getY());
     }
+    /** @noinspection IntegerDivisionInFloatingPointContext*/
     private Point firsIntersectY(Ray ray){
         double x, y;
         if (ray.getAngle() < 90 || ray.getAngle() >= 270){
@@ -71,6 +94,7 @@ public class MainModel {
         return new Point(x, y);
     }
 
+    /** @noinspection IntegerDivisionInFloatingPointContext*/
     private Point firstIntersectX(Ray ray){
         double x, y;
         if (ray.getAngle() < 180){

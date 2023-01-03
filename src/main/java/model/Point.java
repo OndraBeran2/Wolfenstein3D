@@ -16,4 +16,10 @@ public class Point {
     public double getY() {
         return y;
     }
+
+    public static double distance(Point a, Point b){
+        double x = a.getX() - b.getX();
+        double y = a.getY() - b.getY();
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
 }

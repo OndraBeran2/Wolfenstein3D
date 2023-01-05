@@ -13,6 +13,11 @@ public class WolfensteinApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(WolfensteinApp.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
+
+        stage.widthProperty().addListener((observable, oldVal, newVal) -> {
+
+        });
+
         stage.setScene(scene);
         stage.show();
     }
